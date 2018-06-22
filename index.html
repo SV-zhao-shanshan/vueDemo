@@ -4,115 +4,26 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>VUE Demo</title>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.staticfile.org/vue/2.5.17-beta.0/vue.js"></script>
 </head>
 <body>
-    <!-- <div id="app">{{ message }}</div>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!'
-            }
-        });
-    </script> -->
-    <!-- <div id="app-2">
-        <span v-bind:title='message'>
-            鼠标悬停几秒钟查看此处动态绑定的提示信息！
-        </span>
+    <div id="example">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p>
     </div>
-    <script>
-        var app2 = new Vue({
-            el: '#app-2',
+    <script>    
+        var vm = new Vue({
+            el: '#example',
             data: {
-                message: '页面加载于' + new Date().toLocaleDateString()
-            }
-        });
-    </script> -->
-    <!-- <div id="app-3">
-        <p v-if="seen">现在你看到我了</p>
-    </div>
-    <script>
-        var app3 = new Vue({
-            el: '#app-3',
-            data: {
-                seen: true
-            }
-        });
-    </script> -->
-    <!-- <div id="app-4">
-        <ol>
-            <li v-for="todo in todos">
-                {{ todo.text }}
-            </li>
-        </ol>
-    </div>
-    <script>
-        var app4 = new Vue({
-            el: '#app-4',
-            data: {
-                todos: [
-                    { text: '学习 JavaScript' },
-                    { text: '学习 Vue' },
-                    { text: '学习 HTML5' }
-                ]
-            }
-        });
-    </script> -->
-    <!-- <div id="app-5">
-        <p>{{ message }}</p>
-        <button v-on:click="reverseMessage">逆转消息</button>
-    </div>
-    <script>
-        var app5 = new Vue({
-            el: '#app-5',
-            data: {
-                message: 'Hello Vue.js!'
+                message: 'hello VueJS'
             },
-            methods: {
-                reverseMessage: function() {
-                    this.message = this.message.split('').reverse().join('')
+            computed: {
+                // a computed getter
+                reversedMessage: function() {
+                    // `this` points to the vm instance
+                    return this.message.split('').reverse().join('');
                 }
-            }
-        });
-    </script> -->
-    <!-- <div id="app-6">
-        <p>{{ message }}</p>
-        <input v-model="message">
-    </div>
-    <script>
-        var app6 = new Vue({
-            el: '#app-6',
-            data: {
-                message: 'Hello Vue!'
-            }
-        });
-    </script> -->
-    <div id="app-7">
-        <ol>
-            <todo-item
-                v-for="item in groceryList"
-                v-bind:todo="item"
-                v-bind:key="item.id">
-            </todo-item>
-        </ol>
-    </div>
-    <script>
-        Vue.component('todo-item', {
-            props: ['todo'],
-            template: '<li>{{ todo.text }}</li>'
-        });
-        
-        var app7 = new Vue({
-            el: '#app-7',
-            data: {
-                groceryList: [
-                    { id: 0, text: '蔬菜' },
-                    { id: 1, text: '奶酪' },
-                    { id: 2, text: '水果' }
-                ]
             }
         });
     </script>
