@@ -3,23 +3,35 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>VUE Demo之属性绑定和双向数据绑定</title>
+    <title>VUE Demo之计算属性与侦听器</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.staticfile.org/vue/2.5.17-beta.0/vue.js"></script>
 </head>
 <body>
     <div id="root">
-        <div v-bind:title="title">Hello World</div>
-        <input v-model="content" />
-        <div>{{content}}</div>
+        姓：<input v-model="firstName" />
+        名：<input v-model="lastName" />
+        <div>{{fullName}}</div>
+        <div>{{count}}</div>
     </div>
 
     <script>    
         var vm = new Vue({
             el: '#root',
             data: {
-                title: 'this is hello world',
-                content: 'this is content'
+                firstName: '',
+                lastName: '',
+                count: 0
+            },
+            computed: {
+                fullName: function() {
+                    return this.firstName + ' ' + this.lastName;
+                }
+            },
+            watch: {
+                fullName: function() {
+                    this.count ++;
+                }
             }
         });
     </script>
