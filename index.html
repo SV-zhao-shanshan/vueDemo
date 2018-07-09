@@ -3,52 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>VUE Demo</title>
+    <title>VUE Demo之属性绑定和双向数据绑定</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.staticfile.org/vue/2.5.17-beta.0/vue.js"></script>
 </head>
 <body>
-    <div id="example">
-        <p>Ask a yes/no question:
-            <input v-model="question">
-        </p>
-        <p>{{ answer }}</p>
+    <div id="root">
+        <div v-bind:title="title">Hello World</div>
+        <input v-model="content" />
+        <div>{{content}}</div>
     </div>
 
-    <script src="https://cdn.staticfile.org/vue/2.5.17-beta.0/vue.js"></script>
-    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
-    <script src="https://cdn.staticfile.org/lodash.js/4.17.10/lodash.min.js"></script>
     <script>    
         var vm = new Vue({
-            el: '#example',
+            el: '#root',
             data: {
-                question: '',
-                answer: 'I cannot give you an answer until you ask a question!'
-            },
-            watch: {
-                // 如果`question`发生改变，这个函数就会运行
-                question: function(newQuestion, oldQuestion) {
-                    this.answer = 'Waiting for you to stop typing...';
-                    this.debouncedGetAnswer()
-                }
-            },
-            created: function() {
-                this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
-            },
-            methods: {
-                getAnswer: function() {
-                    if(this.question.indexOf('?') === -1) {
-                        this.answer = 'Questions usually contain a question mark. ;-)';
-                        return;
-                    }
-                    this.answer = 'Thinking...';
-                    var vmExp = this;
-                    axios.get('https://yesno.wtf/api').then(function(response) {
-                        vmExp.answer = _.capitalize(response.data.answer);
-                    })
-                    .catch(function(error) {
-                        vmExp.answer = 'Error! Could not reach the API. ' + error;
-                    });
-                }
+                title: 'this is hello world',
+                content: 'this is content'
             }
         });
     </script>
